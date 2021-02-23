@@ -8,3 +8,10 @@ __add_real_target(png dll SOURCE ${SRC}
 			DEF ${DEFS}
 			LIB zlib
 )
+
+if(INSTALL_PNG)
+	INSTALL(TARGETS png
+				LIBRARY DESTINATION lib
+				ARCHIVE DESTINATION .
+				RUNTIME DESTINATION bin)
+endif()
