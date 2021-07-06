@@ -1,6 +1,11 @@
 set(INCS ${CMAKE_CURRENT_SOURCE_DIR})
 set(INTERFACES ${CMAKE_CURRENT_SOURCE_DIR})
-set(DEFS PNG_BUILD_DLL)
+set(DEFS)
+
+if(WIN32)
+	list(APPEND DEFS PNG_BUILD_DLL)
+endif()
+
 file(GLOB SRC *.c *.h)
 __add_real_target(png dll SOURCE ${SRC}
 			INC ${INCS}
