@@ -1,6 +1,6 @@
 set(INCS ${CMAKE_CURRENT_SOURCE_DIR})
 set(INTERFACES ${CMAKE_CURRENT_SOURCE_DIR})
-set(DEFS )
+set(DEFS PNG_BUILD_DLL)
 file(GLOB SRC *.c *.h)
 __add_real_target(png dll SOURCE ${SRC}
 			INC ${INCS}
@@ -14,4 +14,9 @@ if(INSTALL_PNG)
 				LIBRARY DESTINATION lib
 				ARCHIVE DESTINATION .
 				RUNTIME DESTINATION bin)
+endif()
+
+if(CC_INSTALL_PNG)
+	file(GLOB PUBLIC_HEADERS *.h)
+	__install_inc_files(png SOURCE ${PUBLIC_HEADERS})
 endif()
