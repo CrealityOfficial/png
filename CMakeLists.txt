@@ -140,6 +140,5 @@ if(INSTALL_PNG)
 endif()
 
 if(CC_INSTALL_PNG)
-	file(GLOB PUBLIC_HEADERS *.h)
-	__install_inc_files(png SOURCE ${PUBLIC_HEADERS})
+	__install_directory_specif(${CMAKE_CURRENT_SOURCE_DIR} png)
 endif()
