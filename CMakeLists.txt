@@ -1,6 +1,7 @@
 set(INCS ${CMAKE_CURRENT_SOURCE_DIR})
 set(INTERFACES ${CMAKE_CURRENT_SOURCE_DIR})
 set(DEFS )
+set(STATIC_PNG 1)
 
 set(PNG_HARDWARE_OPTIMIZATIONS 1)
 if(PNG_HARDWARE_OPTIMIZATIONS)
@@ -140,5 +141,5 @@ if(INSTALL_PNG)
 endif()
 
 if(CC_INSTALL_PNG)
-	__install_directory_specif(${CMAKE_CURRENT_SOURCE_DIR} png)
+	__install_directory_specif(${CMAKE_CURRENT_SOURCE_DIR}/ png)
 endif()
