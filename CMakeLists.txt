@@ -3,6 +3,8 @@ set(INTERFACES ${CMAKE_CURRENT_SOURCE_DIR})
 set(DEFS Z_PREFIX)
 set(STATIC_PNG 1)
 
+__cc_find(ZLib)
+
 set(PNG_HARDWARE_OPTIMIZATIONS 1)
 if(PNG_HARDWARE_OPTIMIZATIONS)
 # set definitions and sources for arm
