@@ -1,9 +1,9 @@
 set(INCS ${CMAKE_CURRENT_SOURCE_DIR})
 set(INTERFACES ${CMAKE_CURRENT_SOURCE_DIR})
-set(DEFS Z_PREFIX)
 set(STATIC_PNG 1)
 
-__cc_find(ZLib)
+__cc_find(zlib_static)
+__assert_target(zlib_static)
 
 set(PNG_HARDWARE_OPTIMIZATIONS 1)
 if(PNG_HARDWARE_OPTIMIZATIONS)
@@ -111,37 +111,18 @@ endif()
 endif(PNG_HARDWARE_OPTIMIZATIONS)
 
 file(GLOB SRC *.c *.h)
-if(STATIC_PNG)
-	__add_real_target(png lib SOURCE ${SRC}
-				  ${libpng_arm_sources}
-				  ${libpng_intel_sources}
-				  ${libpng_mips_sources}
-				  ${libpng_powerpc_sources}
-			INC ${INCS}
-			INTERFACE ${INTERFACES}
-			DEF ${DEFS}
-			LIB zlib
-	)
-else()
-	__add_real_target(png dll SOURCE ${SRC}
-				  ${libpng_arm_sources}
-				  ${libpng_intel_sources}
-				  ${libpng_mips_sources}
-				  ${libpng_powerpc_sources}
-			INC ${INCS}
-			INTERFACE ${INTERFACES}
-			DEF ${DEFS}
-			LIB zlib
-	)
-endif()
+__add_real_target(png_static lib SOURCE ${SRC}
+			  ${libpng_arm_sources}
+			  ${libpng_intel_sources}
+			  ${libpng_mips_sources}
+			  ${libpng_powerpc_sources}
+		INC ${INCS}
+		INTERFACE ${INTERFACES}
+		DEF ${DEFS}
+		ILIB zlib_static
+)
 
-if(INSTALL_PNG)
-	INSTALL(TARGETS png
-				LIBRARY DESTINATION lib
-				ARCHIVE DESTINATION .
-				RUNTIME DESTINATION bin)
-endif()
 
-if(CC_INSTALL_PNG)
-	__install_directory_specif(${CMAKE_CURRENT_SOURCE_DIR}/ png)
+if(CC_INSTALL_PNG_STATIC)
+	__install_directory_specif(${CMAKE_CURRENT_SOURCE_DIR}/ png_static)
 endif()
